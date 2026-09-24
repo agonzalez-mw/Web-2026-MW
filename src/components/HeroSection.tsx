@@ -17,7 +17,7 @@ const HERO_SLIDE: HeroSlide = {
   serviceId: 'consultoria',
   titlePrefix: 'Transformamos tus datos en ',
   highlightText: 'resultados de negocio',
-  titleSuffix: ' escalables.',
+  titleSuffix: ' escalables',
   subtitle: 'Somos el Partner Estratégico en Marketing Digital que tu empresa necesita. Integramos analítica avanzada (GA4), Inteligencia Artificial, campañas y Full Stack GMP para maximizar el retorno de tu inversión publicitaria.'
 };
 
