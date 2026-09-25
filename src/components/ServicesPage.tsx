@@ -38,6 +38,21 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
   onNavigateHome
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    service: 'ga4',
+    message: '',
+    consent: true
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
   // Helper to render icon for each service
   const renderServiceIcon = (iconName: string, id: string) => {
@@ -144,60 +159,162 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
               </div>
             </div>
 
-            {/* Right Illustrative Ecosystem Card (Matching wireframe graphic placeholder) */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl bg-[#0a0f1d]/75 backdrop-blur-md p-6 sm:p-8 text-white shadow-2xl border border-slate-800/80">
-                <div className="flex items-center justify-between pb-5 border-b border-slate-800">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-3 h-3 rounded-full bg-[#74bf28]"></div>
-                    <span className="text-xs font-mono font-bold tracking-wider text-slate-300">
-                      MW DATA & MEDIA ENGINE
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-[#74bf28]/20 text-[#8ce033] border border-[#74bf28]/40">
-                    ACTIVO
-                  </span>
+            {/* Right Contact Form Card */}
+            <div className="lg:col-span-5" id="contacto-servicios">
+              <div className="bg-[#111c35]/95 border border-slate-700/80 rounded-2xl p-6 sm:p-7 shadow-2xl backdrop-blur-sm">
+                <div className="mb-4">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-white">
+                    Cuéntanos tu Desafío
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Te ayudamos a encontrar la mejor solución técnica y estratégica.
+                  </p>
                 </div>
 
-                <div className="py-6 space-y-4">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-slate-900/80 rounded-lg p-3 border border-slate-800">
-                      <div className="text-[11px] text-slate-400 font-mono">GMP Suite</div>
-                      <div className="text-sm font-bold text-white mt-0.5">GA4 & DV360</div>
-                      <div className="text-[10px] text-[#74bf28] mt-1">✓ Server-Side Tagging</div>
+                {submitted ? (
+                  <div className="p-6 bg-[#0a0f1d] rounded-xl border border-slate-700 text-center space-y-3">
+                    <div className="w-12 h-12 rounded-full bg-[#74bf28]/20 text-[#74bf28] flex items-center justify-center mx-auto">
+                      <CheckCircle2 className="w-7 h-7" />
                     </div>
-                    <div className="bg-slate-900/80 rounded-lg p-3 border border-slate-800">
-                      <div className="text-[11px] text-slate-400 font-mono">Cloud Lake</div>
-                      <div className="text-sm font-bold text-white mt-0.5">BigQuery ML</div>
-                      <div className="text-[10px] text-[#74bf28] mt-1">✓ Real-Time Streaming</div>
-                    </div>
-                    <div className="bg-slate-900/80 rounded-lg p-3 border border-slate-800">
-                      <div className="text-[11px] text-slate-400 font-mono">Privacidad</div>
-                      <div className="text-sm font-bold text-white mt-0.5">Ley 21.719</div>
-                      <div className="text-[10px] text-[#74bf28] mt-1">✓ Consent Mode v2</div>
-                    </div>
-                    <div className="bg-slate-900/80 rounded-lg p-3 border border-slate-800">
-                      <div className="text-[11px] text-slate-400 font-mono">Automatización</div>
-                      <div className="text-sm font-bold text-white mt-0.5">HubSpot CRM</div>
-                      <div className="text-[10px] text-[#74bf28] mt-1">✓ Lead Scoring MQL/SQL</div>
-                    </div>
+                    <h4 className="text-base font-bold text-white">¡Requerimiento Recibido con Éxito!</h4>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Hemos asignado tu caso a un <strong>Lead Solution Consultant</strong> de Mentalidad Web. Te contactaremos en menos de 24 horas hábiles a <span className="text-[#8ce033] font-semibold">{formData.email}</span>.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setSubmitted(false)}
+                      className="mt-2 text-xs text-slate-400 hover:text-white underline cursor-pointer"
+                    >
+                      Enviar otra consulta
+                    </button>
                   </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="services-name">
+                        Nombre y Apellido *
+                      </label>
+                      <input
+                        id="services-name"
+                        required
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="Ej. Andrea Morales"
+                        className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                      />
+                    </div>
 
-                  <div className="pt-2 flex items-center justify-between text-xs text-slate-400 font-mono">
-                    <span>Atribución Algorítmica</span>
-                    <span className="text-[#74bf28] font-bold">100% First-Party</span>
-                  </div>
-                </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="services-email">
+                        Email Corporativo *
+                      </label>
+                      <input
+                        id="services-email"
+                        required
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="amorales@empresa.cl"
+                        className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                      />
+                    </div>
 
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                  <span className="text-slate-400">¿Deseas evaluar tu infraestructura?</span>
-                  <button
-                    onClick={() => onOpenConsultation('Auditoría Inicial')}
-                    className="text-[#74bf28] hover:text-[#8ce033] font-bold flex items-center gap-1 cursor-pointer"
-                  >
-                    Auditoría gratuita <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="services-company">
+                          Empresa / Organización *
+                        </label>
+                        <input
+                          id="services-company"
+                          required
+                          type="text"
+                          value={formData.company}
+                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                          placeholder="Ej. Retail Group S.A."
+                          className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="services-phone">
+                          Teléfono / WhatsApp *
+                        </label>
+                        <input
+                          id="services-phone"
+                          required
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder="+56 9 1234 5678"
+                          className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="services-service">
+                        Área de Interés Principal
+                      </label>
+                      <select
+                        id="services-service"
+                        value={formData.service}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white focus:border-[#74bf28] px-3 py-2 shadow-xs"
+                      >
+                        <option value="ga4">Google Analytics 4 & GA360 / GTM Server-Side</option>
+                        <option value="ley-datos">Cumplimiento Ley 21.719 & Consent Mode v2</option>
+                        <option value="bigquery">BigQuery, Data Engineering & Dashboards</option>
+                        <option value="sem-dv360">Marketing Digital & Programmatic DV360</option>
+                        <option value="ia-predictive">Modelos Predictivos & IA Aplicada</option>
+                        <option value="hubspot">HubSpot, Inbound & Lead Scoring</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="services-message">
+                        Breve descripción de tu objetivo
+                      </label>
+                      <textarea
+                        id="services-message"
+                        rows={2}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        placeholder="Cuéntanos sobre tus herramientas actuales, tiempos o metas..."
+                        className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                      ></textarea>
+                    </div>
+
+                    <div className="flex items-start gap-2 pt-0.5">
+                      <input
+                        id="services-consent"
+                        required
+                        type="checkbox"
+                        checked={formData.consent}
+                        onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                        className="mt-0.5 rounded border-slate-700 bg-[#0a0f1d] text-[#74bf28] focus:ring-[#74bf28]"
+                      />
+                      <label className="text-[10px] text-slate-400 leading-tight cursor-pointer" htmlFor="services-consent">
+                        Autorizo el tratamiento de mis datos de contacto para la coordinación de esta consultoría según la{' '}
+                        <span className="underline text-[#74bf28]">Ley de Datos 21.719</span>.
+                      </label>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full py-3 px-4 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-500 text-white font-extrabold uppercase tracking-wider text-xs rounded-lg shadow-lg hover:shadow-xl transition duration-200 flex items-center justify-center gap-2 cursor-pointer mt-2"
+                    >
+                      <span>Solicitar Diagnóstico</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+
+                    <div className="text-center pt-0.5">
+                      <span className="text-[10px] text-slate-400 flex items-center justify-center gap-1.5">
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#74bf28]" />
+                        Respuesta garantizada en menos de 24 horas por un Lead Solution Consultant.
+                      </span>
+                    </div>
+                  </form>
+                )}
               </div>
             </div>
 
@@ -417,39 +534,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         ))}
 
       </div>
-
-      {/* Call To Action Banner (Matching Wireframe exact green band) */}
-      <section className="bg-[#74bf28] text-[#060a12] py-12 lg:py-16 relative overflow-hidden">
-        {/* Subtle geometric pattern */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000000_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            
-            {/* Left Headline & Subtitle */}
-            <div className="space-y-2 text-center md:text-left">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight">
-                ¿Hablamos 30 minutos de tu proyecto?
-              </h2>
-              <p className="text-sm sm:text-base text-slate-900 font-medium max-w-xl">
-                Sin compromiso, definamos la ruta más adecuada para acelerar tus resultados.
-              </p>
-            </div>
-
-            {/* Right Button (Dark button from wireframe "Agendar llamada") */}
-            <div className="shrink-0">
-              <button
-                onClick={() => onOpenConsultation('Reunión 30 minutos')}
-                className="px-8 py-4 rounded-xl bg-slate-950 text-white font-extrabold text-sm hover:bg-slate-900 hover:scale-105 transition-all shadow-xl hover:shadow-2xl cursor-pointer flex items-center gap-2.5"
-              >
-                <Calendar className="w-4 h-4 text-[#74bf28]" />
-                <span>Agendar llamada</span>
-              </button>
-            </div>
-
-          </div>
-        </div>
-      </section>
 
     </div>
   );
