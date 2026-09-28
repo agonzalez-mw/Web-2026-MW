@@ -45,86 +45,135 @@ export function getServiceExtendedData(service: ServiceItem): ServiceDetailExten
   if (service.title.includes('SEO') || serviceId.includes('seo') || service.id === 'consultoria-ga4') {
     return {
       heroTag: 'SERVICIOS • SEO & GEO',
-      heroHeadline: 'Posicionamiento orgánico de precisión para Google e Inteligencias Artificiales',
-      heroDescription: 'Estrategias de posicionamiento orgánico basadas en datos para maximizar la visibilidad en Google e IAS (AEO, GEO, ChatGPT, Perplexity y Gemini), Core Web Vitals y Local SEO.',
-      downloadLabel: 'Descargar Checklist SEO & GEO 2026',
+      heroHeadline: 'Domina los resultados de Google y las respuestas de Inteligencia Artificial.',
+      heroDescription: 'Tu competencia ya se está adaptando. Atrae tráfico cualificado y convierte tu sitio en la fuente principal para motores tradicionales y generativos (ChatGPT, Gemini, Claude) mediante estrategias avanzadas de SEO y GEO.',
+      downloadLabel: 'Ver Casos de Éxito',
       checklistTitle: 'Guía de Auditoría SEO Técnica y GEO',
       whatWeDoTitle: '¿Qué hacemos por tu marca en SEO & GEO?',
       whatWeDoSubtitle: 'Estrategias de posicionamiento orgánico orientadas a tráfico calificado de alta conversión y visibilidad en motores generativos.',
       pillars: [
         {
-          title: 'Auditoría Técnica & Core Web Vitals',
-          description: 'Auditoría técnica profunda, optimización de velocidad de carga, renderizado y arquitectura web.',
+          title: 'Estrategia SEO',
+          description: 'Investigación, análisis y roadmap personalizado para alcanzar tus objetivos de negocio.',
           iconName: 'Compass'
         },
         {
-          title: 'Generative Engine Optimization (GEO & AEO)',
-          description: 'Optimización de contenidos estructurados para respuestas en modelos de IA generativa (Gemini, ChatGPT, Copilot).',
+          title: 'SEO Técnico',
+          description: 'Optimizamos la estructura de tu sitio para mejorar el rastreo, indexación y rendimiento.',
+          iconName: 'Cpu'
+        },
+        {
+          title: 'Contenido Optimizado',
+          description: 'Creamos y optimizamos contenido alineado a la intención de búsqueda y motores de IA.',
+          iconName: 'FileText'
+        },
+        {
+          title: 'GEO (IA Visibility)',
+          description: 'Optimizamos tu contenido para que aparezca en ChatGPT, Gemini, Claude y otros motores de IA.',
           iconName: 'Sparkles'
         },
         {
-          title: 'Local SEO & Google Business',
-          description: 'Gestión a escala de fichas de Google Business Profile, reputación local y presencia en Google Maps.',
-          iconName: 'Layers'
-        },
-        {
-          title: 'ASO & Estrategia Orgánica',
-          description: 'Optimización orgánica para tiendas de aplicaciones (App Store / Google Play) y autoridad temática.',
-          iconName: 'TrendingUp'
+          title: 'Link Building',
+          description: 'Construimos autoridad con enlaces relevantes que impulsan tu posicionamiento.',
+          iconName: 'Link'
         }
       ],
       steps: [
         {
           step: 1,
-          title: 'Auditoría Técnica y Benchmark Competitivo',
-          timeframe: 'Semanas 1 - 2',
-          description: 'Diagnóstico exhaustivo de rastreo, indexación, Core Web Vitals y brechas semánticas frente a la competencia.',
-          deliverable: 'Auditoría SEO/GEO y Roadmap de Priorización Técnica'
+          title: '1. Auditoría y Estrategia',
+          timeframe: 'Fase Inicial',
+          description: 'Realizamos una radiografía técnica y semántica inicial. Evaluamos cómo ven los buscadores y las IAs a tu sitio hoy, detectando errores urgentes y oportunidades de posicionamiento.',
+          deliverable: 'Radiografía técnica, semántica y roadmap de prioridades críticas.'
         },
         {
           step: 2,
-          title: 'Implementación Técnica y On-Page',
-          timeframe: 'Semanas 3 - 6',
-          description: 'Corrección de errores críticos de código, marcado Schema.org enriquecido y optimización semántica.',
-          deliverable: 'Sitio optimizado con marcado JSON-LD estructurado'
+          title: '2. Configuración y Salud Técnica',
+          timeframe: 'Implementación',
+          description: 'Preparamos el terreno. Configuramos las plataformas de medición clave y resolvemos las fricciones técnicas críticas (como velocidad y rastreo) frente a tus competidores.',
+          deliverable: 'Sitio optimizado en Core Web Vitals, rastreo e indexabilidad.'
         },
         {
           step: 3,
-          title: 'Local SEO y Adaptación Generativa',
-          timeframe: 'Semanas 7 - 10',
-          description: 'Estandarización de fichas en Google Business Profile y estructuración de entidades para motores de IA.',
-          deliverable: 'Presencia omnicanal en mapas y motores generativos'
+          title: '3. Estrategia de Autoridad y Contenido',
+          timeframe: 'Optimización y GEO',
+          description: 'Trazamos el plan de acción. Entregamos recomendaciones precisas para optimizar tu arquitectura web y asegurar que tu contenido sea relevante y "citable" para Google y Modelos de Lenguaje (AEO/GEO).',
+          deliverable: 'Guías editoriales, entidades Schema.org y arquitectura de contenido citable.'
         },
         {
           step: 4,
-          title: 'Monitoreo, Iteración y Aceleración Orgánica',
-          timeframe: 'Continuo',
-          description: 'Seguimiento de rankings, cuota de visibilidad orgánica e impacto directo en conversiones y leads.',
-          deliverable: 'Dashboard ejecutivo en tiempo real en Looker Studio'
+          title: '4. SEO Ongoing',
+          timeframe: 'Acompañamiento Continuo',
+          description: 'Acompañamiento continuo. Monitoreamos tu evolución con dashboards en tiempo real y ejecutamos mejoras mensuales para proteger y escalar tu visibilidad a largo plazo.',
+          deliverable: 'Dashboard ejecutivo en tiempo real en Looker Studio y optimizaciones mensuales.'
         }
       ],
       relatedCaseId: 'bci-seguros',
       relatedCaseHighlight: '+88% visibilidad orgánica calificada',
       relatedCaseContext: 'Optimización técnica integral de arquitectura web y posicionamiento en Google para captura de demanda de alta intención.',
       tools: [
-        { name: 'Google Search Console', category: 'Indexación' },
-        { name: 'Screaming Frog', category: 'Auditoría' },
-        { name: 'Semrush', category: 'Keyword Intelligence' },
-        { name: 'Google Business Profile', category: 'Local SEO' },
-        { name: 'Lighthouse', category: 'Core Web Vitals' }
+        { name: 'Google Search Console', category: 'Indexación & Rendimiento' },
+        { name: 'Google Analytics 4', category: 'Medición Orgánica' },
+        { name: 'Semrush', category: 'Keyword & Market Intelligence' },
+        { name: 'Screaming Frog', category: 'Auditoría Técnica Crawler' },
+        { name: 'WebCEO', category: 'Rank Tracking & Auditoría' },
+        { name: 'Ahrefs', category: 'Backlinks & Autoridad' },
+        { name: 'Pingdom', category: 'Velocidad & Uptime' },
+        { name: 'Looker Studio', category: 'Dashboarding Ejecutivo' },
+        { name: 'Amplitude', category: 'Product & Behavioral Analytics' }
       ],
       faqs: [
         {
-          question: '¿Qué diferencia a GEO / AEO del SEO tradicional?',
-          answer: 'El SEO tradicional optimiza para rankings en páginas de resultados de búsqueda (SERP). GEO (Generative Engine Optimization) y AEO (Answer Engine Optimization) estructuran la información y las entidades para que motores de IA como Gemini, ChatGPT y Perplexity citen tu marca como fuente autorizada en respuestas directas.'
+          question: '¿Qué es el posicionamiento web SEO y cómo funciona?',
+          answer: 'El SEO es un conjunto de técnicas que ayudan a que tu sitio aparezca en los primeros resultados de Google mediante mejoras técnicas y de contenido, esto se diferencia de las campañas, donde existe una inversión.'
         },
         {
-          question: '¿Cuánto tiempo toma ver resultados tangibles en SEO técnico?',
-          answer: 'Las mejoras técnicas en Core Web Vitals e indexación suelen reflejarse en 4 a 8 semanas, mientras que el crecimiento en visibilidad competitiva y autoridad orgánica se consolida típicamente entre el 3er y 6to mes.'
+          question: '¿Cuánto tiempo tarda en dar resultados una estrategia SEO?',
+          answer: 'Generalmente entre 3 y 6 meses, dependiendo de la competencia y del estado inicial del sitio.'
         },
         {
-          question: '¿Incluye soporte para Google Business Profile y tiendas de apps (ASO)?',
-          answer: 'Sí, el servicio incluye gestión centralizada de Local SEO para redes de sucursales o tiendas, así como optimización de metadatos, descripciones y activos visuales en App Store y Google Play.'
+          question: '¿Cuál es la diferencia entre SEO y SEM?',
+          answer: 'El SEO mejora la visibilidad orgánica sin pagar a Google; el SEM se basa en anuncios pagados.'
+        },
+        {
+          question: '¿Por qué mi página no aparece en Google?',
+          answer: 'Puede deberse a errores técnicos, falta de indexación o ausencia de contenido optimizado.'
+        },
+        {
+          question: '¿Qué incluye una auditoría SEO completa?',
+          answer: 'Incluye revisión técnica, análisis de contenidos, enlaces internos/externos y recomendaciones de mejora.'
+        },
+        {
+          question: '¿Qué beneficios tiene el SEO local?',
+          answer: 'Permite que tu negocio aparezca en búsquedas geográficas y atraiga clientes cercanos.'
+        },
+        {
+          question: '¿Cómo afectan las actualizaciones de Google al SEO?',
+          answer: 'Cambian los factores de ranking y requieren ajustes continuos en la estrategia.'
+        },
+        {
+          question: '¿Por qué es importante el SEO en la era de la IA?',
+          answer: 'Porque las IAs y buscadores generativos muestran respuestas basadas en sitios optimizados y confiables.'
+        },
+        {
+          question: '¿Cómo medir el éxito del SEO?',
+          answer: 'Con métricas como posiciones en buscadores, tráfico orgánico y conversiones logradas.'
+        },
+        {
+          question: '¿Qué diferencia hay entre un servicio puntual y una consultoría SEO ongoing?',
+          answer: 'El servicio puntual resuelve una necesidad específica; la consultoría ongoing asegura mejoras continuas.'
+        },
+        {
+          question: '¿Qué es GEO (Generative Engine Optimization)?',
+          answer: 'GEO es la optimización de contenidos para que los motores de búsqueda generativos basados en inteligencia artificial utilicen un sitio web como fuente directa al generar respuestas para los usuarios.'
+        },
+        {
+          question: '¿Cuál es la diferencia entre SEO y GEO?',
+          answer: 'El SEO busca posicionar un sitio en los resultados orgánicos de Google, mientras que el GEO optimiza el contenido para que sea citado dentro de respuestas generadas por IA como ChatGPT, Gemini o Claude, incluso sin que el usuario haga clic en el sitio web.'
+        },
+        {
+          question: '¿Qué beneficios tiene implementar una estrategia GEO?',
+          answer: 'Una estrategia GEO permite aumentar la visibilidad de marca, posicionarse como autoridad en un tema y aparecer directamente en respuestas de inteligencia artificial, logrando presencia digital incluso cuando no existe tráfico directo al sitio.'
         }
       ],
       ctaHeadline: '¿Listo para dominar las búsquedas en Google y motores de Inteligencia Artificial?',

@@ -25,6 +25,8 @@ import {
 import { ServiceItem } from '../types';
 import { getServiceExtendedData, ServicePillar } from '../data/serviceDetailData';
 import { CASE_STUDIES } from '../data/martechData';
+import { SeoAeoGeoVennSection } from './SeoAeoGeoVennSection';
+import seoGeoBg from '../assets/images/seo_geo_bg.jpg';
 
 interface ServiceDetailPageProps {
   service: ServiceItem;
@@ -44,6 +46,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
   const formHeadingId = useId();
   const data = getServiceExtendedData(service);
   const relatedCase = CASE_STUDIES.find(c => c.id === data.relatedCaseId) || CASE_STUDIES[0];
+  const isSeoService = service.title.includes('SEO') || service.id.includes('seo') || service.id === 'consultoria-ga4';
 
   // Lead Form State
   const [formData, setFormData] = useState({
@@ -120,101 +123,162 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
       {/* ============================================================ */}
       {/* 1. HERO SECTION (Matching Wireframe Left Content + Right Form) */}
       {/* ============================================================ */}
-      <section className="bg-gradient-to-b from-slate-50 via-white to-white py-10 lg:py-16 border-b border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        className={`relative py-10 lg:py-16 border-b overflow-hidden ${
+          isSeoService
+            ? 'bg-[#060a14] border-slate-800'
+            : 'bg-gradient-to-b from-slate-50 via-white to-white border-slate-200/80'
+        }`}
+        style={
+          isSeoService
+            ? {
+                backgroundImage: `url(${seoGeoBg})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }
+            : undefined
+        }
+      >
+        {isSeoService && (
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060a12]/95 via-[#08111e]/90 to-[#060a12]/80 pointer-events-none" />
+        )}
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
-            {/* Left Hero Column: Wireframe Structure */}
+            {/* Left Hero Column */}
             <div className="lg:col-span-7 space-y-6">
               
               {/* Badge SERVICIOS */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#74bf28]/15 border border-[#74bf28]/30 text-[#4c8716] text-xs font-bold uppercase tracking-wider">
+              <div
+                className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
+                  isSeoService
+                    ? 'bg-[#74bf28]/20 border border-[#74bf28]/40 text-[#8ce033]'
+                    : 'bg-[#74bf28]/15 border border-[#74bf28]/30 text-[#4c8716]'
+                }`}
+              >
                 <span className="w-2 h-2 rounded-full bg-[#74bf28]"></span>
                 <span>{data.heroTag}</span>
               </div>
 
               {/* Big Headline */}
-              <h1 className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-slate-950 tracking-tight leading-[1.18]">
+              <h1
+                className={`text-3xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight leading-[1.18] ${
+                  isSeoService ? 'text-white' : 'text-slate-950'
+                }`}
+              >
                 {data.heroHeadline}
               </h1>
 
               {/* Subtitle / Pain Point text */}
-              <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">
+              <p
+                className={`text-base sm:text-lg font-normal leading-relaxed ${
+                  isSeoService ? 'text-slate-200' : 'text-slate-600'
+                }`}
+              >
                 {data.heroDescription}
               </p>
 
-              {/* Illustrative Architecture / Graphic Placeholder Box (Wireframe photo placeholder) */}
-              <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-[#0a0f1d] to-[#121c32] p-6 text-white shadow-xl relative overflow-hidden">
-                {/* Background decorative glow */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#74bf28]/15 rounded-full blur-3xl pointer-events-none"></div>
+              {/* Specification Delivery Box: Hidden for SEO/GEO as requested, shown for others */}
+              {!isSeoService && (
+                <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-[#0a0f1d] to-[#121c32] p-6 text-white shadow-xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#74bf28]/15 rounded-full blur-3xl pointer-events-none"></div>
 
-                <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-[#74bf28]">
-                      <ImageIcon className="w-4 h-4" />
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-[#74bf28]">
+                        <ImageIcon className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                          {service.title} • Especificación de Entrega
+                        </h4>
+                        <p className="text-[10px] text-slate-400 font-mono">
+                          {service.subtitle}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-                        {service.title} • Especificación de Entrega
-                      </h4>
-                      <p className="text-[10px] text-slate-400 font-mono">
-                        {service.subtitle}
-                      </p>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#74bf28]/20 text-[#8ce033] border border-[#74bf28]/40">
-                    {service.impactMetric}
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-                  {service.deliverables.slice(0, 4).map((deliv, idx) => (
-                    <div key={idx} className="flex items-start gap-2 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800/80 text-xs text-slate-300">
-                      <CheckCircle2 className="w-4 h-4 text-[#74bf28] shrink-0 mt-0.5" />
-                      <span className="text-[11px] leading-snug">{deliv}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-800/60">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 mr-1">Stack Certificado:</span>
-                  {service.techStack.map((tech, idx) => (
-                    <span key={idx} className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                      {tech}
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#74bf28]/20 text-[#8ce033] border border-[#74bf28]/40">
+                      {service.impactMetric}
                     </span>
-                  ))}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                    {service.deliverables.slice(0, 4).map((deliv, idx) => (
+                      <div key={idx} className="flex items-start gap-2 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800/80 text-xs text-slate-300">
+                        <CheckCircle2 className="w-4 h-4 text-[#74bf28] shrink-0 mt-0.5" />
+                        <span className="text-[11px] leading-snug">{deliv}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-800/60">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 mr-1">Stack Certificado:</span>
+                    {service.techStack.map((tech, idx) => (
+                      <span key={idx} className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* CTAs Side by Side matching wireframe: Green "Agendar Diagnóstico" + Blue "Descargar Checklist" */}
+              {/* Action Buttons: For SEO/GEO show ONLY the blue button "Ver Casos de Éxito" */}
               <div className="flex flex-wrap items-center gap-4 pt-2">
-                <button
-                  onClick={scrollToForm}
-                  className="px-6 py-3.5 rounded-xl bg-[#74bf28] text-[#060a12] font-bold text-xs uppercase tracking-wider hover:bg-[#8ce033] shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
-                >
-                  <Calendar className="w-4 h-4" />
-                  <span>Agendar Diagnóstico</span>
-                </button>
+                {isSeoService ? (
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById('caso-relacionado');
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth' });
+                      } else if (onSelectCaseStudy) {
+                        onSelectCaseStudy(data.relatedCaseId);
+                      }
+                    }}
+                    className="px-8 py-3.5 rounded-xl bg-[#1d5ec9] hover:bg-[#1648a0] text-white font-bold text-xs uppercase tracking-wider shadow-lg hover:shadow-blue-500/25 transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                    <span>Ver Casos de Éxito</span>
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      onClick={scrollToForm}
+                      className="px-6 py-3.5 rounded-xl bg-[#74bf28] text-[#060a12] font-bold text-xs uppercase tracking-wider hover:bg-[#8ce033] shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
+                    >
+                      <Calendar className="w-4 h-4" />
+                      <span>Agendar Diagnóstico</span>
+                    </button>
 
-                <button
-                  onClick={() => setIsChecklistOpen(true)}
-                  className="px-6 py-3.5 rounded-xl bg-[#1d5ec9] hover:bg-[#1648a0] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>{data.downloadLabel}</span>
-                </button>
+                    <button
+                      onClick={() => setIsChecklistOpen(true)}
+                      className="px-6 py-3.5 rounded-xl bg-[#1d5ec9] hover:bg-[#1648a0] text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
+                    >
+                      <Download className="w-4 h-4" />
+                      <span>{data.downloadLabel}</span>
+                    </button>
+                  </>
+                )}
               </div>
 
             </div>
 
-            {/* Right Hero Column: High Conversion Lead Form (Matching Wireframe green container) */}
+            {/* Right Hero Column: Lead Form with more transparent background on SEO/GEO */}
             <div className="lg:col-span-5" id="diagnostico-form">
-              <div className="bg-gradient-to-br from-[#123e20] via-[#0d2a17] to-[#08180e] p-6 sm:p-8 rounded-2xl border border-slate-700/60 shadow-2xl relative text-white">
+              <div
+                className={`p-6 sm:p-8 rounded-2xl border shadow-2xl relative text-white ${
+                  isSeoService
+                    ? 'bg-[#0a1220]/75 backdrop-blur-xl border-slate-700/70'
+                    : 'bg-gradient-to-br from-[#123e20] via-[#0d2a17] to-[#08180e] border-slate-700/60'
+                }`}
+              >
                 <div className="mb-5">
                   <div className="inline-block px-2.5 py-1 bg-[#74bf28]/20 border border-[#74bf28]/40 rounded text-[11px] font-bold text-[#8ce033] uppercase tracking-wider mb-2">
                     Diagnóstico Sin Costo
                   </div>
-                  <h2 id={formHeadingId} className="text-2xl font-extrabold text-white">Cuéntanos tu Desafío</h2>
+                  <h2 id={formHeadingId} className="text-2xl font-extrabold text-white">
+                    {isSeoService ? '¿Hablamos de tu visibilidad orgánica?' : 'Cuéntanos tu Desafío'}
+                  </h2>
                   <p className="text-xs text-emerald-100/80 mt-1">
                     Te ayudamos a encontrar la mejor solución técnica y comercial para tu negocio.
                   </p>
@@ -333,7 +397,9 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                       type="submit"
                       className="w-full py-3.5 rounded-xl bg-[#74bf28] text-[#060a12] font-black text-xs uppercase tracking-wider hover:bg-[#8ce033] shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2 transform active:scale-95"
                     >
-                      <span>Enviar Solicitud de Diagnóstico</span>
+                      <span>
+                        {isSeoService ? 'Solicitar Diagnóstico SEO/GEO' : 'Enviar Solicitud de Diagnóstico'}
+                      </span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </form>
@@ -466,9 +532,14 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
       </section>
 
       {/* ============================================================ */}
+      {/* NUEVO ECOSISTEMA DE VISIBILIDAD: SEO + GEO + AEO (Venn Diagram) */}
+      {/* ============================================================ */}
+      {isSeoService && <SeoAeoGeoVennSection />}
+
+      {/* ============================================================ */}
       {/* 4. SECTION: CASO RELACIONADO (Split Card with Screenshot + Result) */}
       {/* ============================================================ */}
-      <section className="py-14 lg:py-20 bg-white border-b border-slate-200">
+      <section id="caso-relacionado" className="py-14 lg:py-20 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-4">
@@ -600,38 +671,6 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
             })}
           </div>
 
-        </div>
-      </section>
-
-      {/* ============================================================ */}
-      {/* 7. BANNER CTA: VERDE CON BOTÓN OSCURO (Matching Wireframe) */}
-      {/* ============================================================ */}
-      <section className="bg-gradient-to-r from-[#58991b] to-[#74bf28] py-10 lg:py-12 text-[#060a12]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-            
-            {/* Left text */}
-            <div className="space-y-1.5 text-center lg:text-left">
-              <h2 className="text-2xl sm:text-3xl font-black text-[#060a12] tracking-tight">
-                {data.ctaHeadline}
-              </h2>
-              <p className="text-xs sm:text-sm font-medium text-emerald-950/80">
-                {data.ctaSubtitle}
-              </p>
-            </div>
-
-            {/* Right dark button matching wireframe */}
-            <div className="shrink-0">
-              <button
-                onClick={() => onOpenConsultation(`Agendar llamada para ${service.title}`)}
-                className="px-8 py-4 rounded-xl bg-[#060a12] text-white font-extrabold text-xs uppercase tracking-wider hover:bg-slate-900 shadow-xl transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
-              >
-                <span>Agendar llamada</span>
-                <ArrowRight className="w-4 h-4 text-[#74bf28]" />
-              </button>
-            </div>
-
-          </div>
         </div>
       </section>
 
