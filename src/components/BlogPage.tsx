@@ -80,11 +80,6 @@ export const BlogPage: React.FC<BlogPageProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#74bf28]/15 border border-[#74bf28]/30 text-[#8ce033] text-xs font-bold uppercase tracking-wider">
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>INSIGHTS Y TENDENCIAS DIGITALES • MARTECH & DATA</span>
-              </div>
-
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Análisis técnico, regulación y tendencias en <span className="text-[#74bf28]">MarTech</span>
               </h1>
@@ -337,26 +332,6 @@ export const BlogPage: React.FC<BlogPageProps> = ({
           </div>
         )}
       </section>
-
-      {/* CTA Bottom Banner Matching Wireframe */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        <div className="bg-[#74bf28] rounded-2xl p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="text-left">
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[#060a12] leading-snug">
-              ¿Hablamos 30 minutos de tu proyecto?
-            </h3>
-            <p className="text-xs sm:text-sm text-[#060a12]/80 mt-1 font-medium">
-              Sin compromiso, definamos la ruta más adecuada para acelerar tus resultados.
-            </p>
-          </div>
-          <button
-            onClick={() => onOpenConsultation('Mentalidad Insights')}
-            className="shrink-0 px-7 py-3.5 rounded-xl bg-[#060a12] text-white hover:bg-slate-900 text-xs uppercase tracking-wider font-bold transition-all shadow-lg cursor-pointer transform hover:-translate-y-0.5"
-          >
-            Agendar llamada
-          </button>
-        </div>
-      </div>
     </div>
   );
 };

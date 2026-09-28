@@ -41,6 +41,97 @@ export interface ServiceDetailExtended {
 export function getServiceExtendedData(service: ServiceItem): ServiceDetailExtended {
   const serviceId = service.id.toLowerCase();
 
+  // SEO & GEO
+  if (service.title.includes('SEO') || serviceId.includes('seo') || service.id === 'consultoria-ga4') {
+    return {
+      heroTag: 'SERVICIOS • SEO & GEO',
+      heroHeadline: 'Posicionamiento orgánico de precisión para Google e Inteligencias Artificiales',
+      heroDescription: 'Estrategias de posicionamiento orgánico basadas en datos para maximizar la visibilidad en Google e IAS (AEO, GEO, ChatGPT, Perplexity y Gemini), Core Web Vitals y Local SEO.',
+      downloadLabel: 'Descargar Checklist SEO & GEO 2026',
+      checklistTitle: 'Guía de Auditoría SEO Técnica y GEO',
+      whatWeDoTitle: '¿Qué hacemos por tu marca en SEO & GEO?',
+      whatWeDoSubtitle: 'Estrategias de posicionamiento orgánico orientadas a tráfico calificado de alta conversión y visibilidad en motores generativos.',
+      pillars: [
+        {
+          title: 'Auditoría Técnica & Core Web Vitals',
+          description: 'Auditoría técnica profunda, optimización de velocidad de carga, renderizado y arquitectura web.',
+          iconName: 'Compass'
+        },
+        {
+          title: 'Generative Engine Optimization (GEO & AEO)',
+          description: 'Optimización de contenidos estructurados para respuestas en modelos de IA generativa (Gemini, ChatGPT, Copilot).',
+          iconName: 'Sparkles'
+        },
+        {
+          title: 'Local SEO & Google Business',
+          description: 'Gestión a escala de fichas de Google Business Profile, reputación local y presencia en Google Maps.',
+          iconName: 'Layers'
+        },
+        {
+          title: 'ASO & Estrategia Orgánica',
+          description: 'Optimización orgánica para tiendas de aplicaciones (App Store / Google Play) y autoridad temática.',
+          iconName: 'TrendingUp'
+        }
+      ],
+      steps: [
+        {
+          step: 1,
+          title: 'Auditoría Técnica y Benchmark Competitivo',
+          timeframe: 'Semanas 1 - 2',
+          description: 'Diagnóstico exhaustivo de rastreo, indexación, Core Web Vitals y brechas semánticas frente a la competencia.',
+          deliverable: 'Auditoría SEO/GEO y Roadmap de Priorización Técnica'
+        },
+        {
+          step: 2,
+          title: 'Implementación Técnica y On-Page',
+          timeframe: 'Semanas 3 - 6',
+          description: 'Corrección de errores críticos de código, marcado Schema.org enriquecido y optimización semántica.',
+          deliverable: 'Sitio optimizado con marcado JSON-LD estructurado'
+        },
+        {
+          step: 3,
+          title: 'Local SEO y Adaptación Generativa',
+          timeframe: 'Semanas 7 - 10',
+          description: 'Estandarización de fichas en Google Business Profile y estructuración de entidades para motores de IA.',
+          deliverable: 'Presencia omnicanal en mapas y motores generativos'
+        },
+        {
+          step: 4,
+          title: 'Monitoreo, Iteración y Aceleración Orgánica',
+          timeframe: 'Continuo',
+          description: 'Seguimiento de rankings, cuota de visibilidad orgánica e impacto directo en conversiones y leads.',
+          deliverable: 'Dashboard ejecutivo en tiempo real en Looker Studio'
+        }
+      ],
+      relatedCaseId: 'bci-seguros',
+      relatedCaseHighlight: '+88% visibilidad orgánica calificada',
+      relatedCaseContext: 'Optimización técnica integral de arquitectura web y posicionamiento en Google para captura de demanda de alta intención.',
+      tools: [
+        { name: 'Google Search Console', category: 'Indexación' },
+        { name: 'Screaming Frog', category: 'Auditoría' },
+        { name: 'Semrush', category: 'Keyword Intelligence' },
+        { name: 'Google Business Profile', category: 'Local SEO' },
+        { name: 'Lighthouse', category: 'Core Web Vitals' }
+      ],
+      faqs: [
+        {
+          question: '¿Qué diferencia a GEO / AEO del SEO tradicional?',
+          answer: 'El SEO tradicional optimiza para rankings en páginas de resultados de búsqueda (SERP). GEO (Generative Engine Optimization) y AEO (Answer Engine Optimization) estructuran la información y las entidades para que motores de IA como Gemini, ChatGPT y Perplexity citen tu marca como fuente autorizada en respuestas directas.'
+        },
+        {
+          question: '¿Cuánto tiempo toma ver resultados tangibles en SEO técnico?',
+          answer: 'Las mejoras técnicas en Core Web Vitals e indexación suelen reflejarse en 4 a 8 semanas, mientras que el crecimiento en visibilidad competitiva y autoridad orgánica se consolida típicamente entre el 3er y 6to mes.'
+        },
+        {
+          question: '¿Incluye soporte para Google Business Profile y tiendas de apps (ASO)?',
+          answer: 'Sí, el servicio incluye gestión centralizada de Local SEO para redes de sucursales o tiendas, así como optimización de metadatos, descripciones y activos visuales en App Store y Google Play.'
+        }
+      ],
+      ctaHeadline: '¿Listo para dominar las búsquedas en Google y motores de Inteligencia Artificial?',
+      ctaSubtitle: 'Conversemos 30 minutos sobre la madurez técnica y orgánica de tu sitio web.'
+    };
+  }
+
   // Consultoría / GA4 / Medición
   if (serviceId.includes('consultoria') || serviceId.includes('ga4') || serviceId.includes('analytics-360')) {
     return {

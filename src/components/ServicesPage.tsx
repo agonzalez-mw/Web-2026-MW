@@ -129,11 +129,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             
             {/* Left Headline & Pitch */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#74bf28]/15 border border-[#74bf28]/30 text-[#8ce033] text-xs font-bold uppercase tracking-wider">
-                <span className="w-2 h-2 rounded-full bg-[#74bf28] animate-pulse"></span>
-                PORTAFOLIO DE SOLUCIONES MARTECH 2026
-              </div>
-
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
                 Todo lo que podemos hacer por tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#74bf28] via-[#8ce033] to-emerald-400">marketing digital</span>
               </h1>

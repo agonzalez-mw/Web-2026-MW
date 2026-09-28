@@ -160,19 +160,19 @@ export const SERVICES_CATEGORIES: ServiceCategory[] = [
     services: [
       {
         id: 'consultoria-ga4',
-        title: 'Consultoría y data',
-        subtitle: 'GA4, TAG MANAGER, SEO/GEO, ANALYTICS 360',
-        description: 'Auditoría integral de esquemas de medición, diseño de Data Layer corporativo, implementación avanzada de Google Tag Manager Server-Side y migración sin pérdidas.',
+        title: 'SEO y GEO',
+        subtitle: 'AUDITORÍA TÉCNICA, GOOGLE BUSINESS, ESTRATEGIA ORGÁNICA, ASO',
+        description: 'Estrategias de posicionamiento orgánico basadas en datos para maximizar la visibilidad en Google e IAS.',
         iconName: 'SearchCode',
-        tags: ['Google Analytics 4', 'GTM Server-Side', 'Analytics 360', 'Auditoría Técnica'],
+        tags: ['SEO Técnico', 'GEO / AEO', 'Google Business', 'Core Web Vitals', 'ASO'],
         deliverables: [
-          'Data Layer Specification homologado según estándares corporativos.',
-          'Limpieza y auditoría de contenedores GTM web y Server-Side en Google Cloud.',
-          'Configuración de eventos de comercio electrónico mejorado y conversiones offline.',
-          'Gobernanza continua y monitoreo de salud de etiquetas sin pérdidas.'
+          'Auditoría técnica profunda y optimización de Core Web Vitals.',
+          'Gestión a escala de Local SEO y presencia en mapas.',
+          'Optimización para motores de búsqueda de IA (GEO / AEO / ChatGPT / Gemini).',
+          'Estrategia de posicionamiento orgánico de alta conversión y ASO.'
         ],
-        techStack: ['GA4', 'GA360', 'Google Tag Manager', 'Cloud Functions', 'Looker Studio'],
-        impactMetric: '100% trazabilidad validada',
+        techStack: ['Google Search Console', 'Screaming Frog', 'Semrush', 'Google Business Profile', 'Lighthouse'],
+        impactMetric: '+65% tráfico orgánico calificado',
         category: 'consultoria-data',
         categoryTitle: 'Consultoría y data'
       },
@@ -499,7 +499,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'REGULACIÓN & PRIVACIDAD',
     date: '1 Septiembre 2024',
     readTime: '5 min lectura',
-    author: 'Jose Valenzuela',
+    author: 'Pablo González',
     summary: 'El gobierno chileno ingresó un proyecto de ley con suma urgencia para aplicar la entrada en vigencia de la nueva Ley de Protección de Datos Personales (N° 21.719). Analizamos cómo prepararse con Server-Side Tagging.',
     imageUrl: blogPrivacyImg,
     imageAlt: 'Ciberseguridad y protección de datos bajo la Ley 21.719 en Chile',
@@ -520,7 +520,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'ESTRATEGIA MARTECH',
     date: '31 Agosto 2024',
     readTime: '7 min lectura',
-    author: 'Jose Valenzuela',
+    author: 'Pablo González',
     summary: 'El mercado de servicios digitales en Chile se ha llenado de opciones entre agencias creativas y boutiques. Analizamos por qué el rigor de ingeniería de datos y la capacidad cloud son el verdadero diferenciador.',
     imageUrl: blogStrategyImg,
     imageAlt: 'Estrategia e ingeniería MarTech para escala corporativa',
@@ -541,7 +541,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'ANALÍTICA COMERCIAL',
     date: '24 Agosto 2024',
     readTime: '6 min lectura',
-    author: 'Jose Valenzuela',
+    author: 'Pablo González',
     summary: 'A pesar de tener acceso a más información que en cualquier otro momento, los tomadores de decisiones enfrentan una ceguera de dashboards. Cómo estructurar KPIs accionables en Looker Studio y Power BI.',
     imageUrl: blogAnalyticsImg,
     imageAlt: 'Dashboards analíticos y estrategia comercial en Looker Studio',
@@ -837,8 +837,8 @@ export const EXTENDED_BLOG_POSTS: BlogPost[] = [
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: 'jose-valenzuela',
-    name: 'José Valenzuela',
+    id: 'pablo-gonzalez',
+    name: 'Pablo González',
     role: 'CEO & Founder',
     department: 'Dirección General & Estrategia',
     bio: 'Pionero del marketing digital y la analítica web en Latinoamérica. Más de 18 años liderando la transformación de corporaciones en Chile, Perú y México hacia modelos de negocio basados en datos y tecnología.',

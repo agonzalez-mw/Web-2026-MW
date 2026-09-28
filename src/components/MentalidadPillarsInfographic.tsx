@@ -126,7 +126,7 @@ export const MentalidadPillarsInfographic: React.FC = () => {
       {/* Desktop & Tablet View (lg and up) */}
       <div className="hidden lg:grid grid-cols-12 gap-8 items-center max-w-6xl mx-auto">
         
-        {/* Left Column: Pillars 01 and 02 */}
+        {/* Left Column: Pillars 01 (top) and 03 (bottom) */}
         <div className="col-span-4 space-y-16">
           {/* Pillar 01 */}
           <div
@@ -155,29 +155,29 @@ export const MentalidadPillarsInfographic: React.FC = () => {
             )}
           </div>
 
-          {/* Pillar 02 */}
+          {/* Pillar 03 */}
           <div
-            onMouseEnter={() => setActivePillar(1)}
+            onMouseEnter={() => setActivePillar(2)}
             onMouseLeave={() => setActivePillar(null)}
             className={`p-5 rounded-2xl transition-all duration-300 cursor-pointer ${
-              activePillar === 1
-                ? 'bg-slate-50 shadow-md border-l-4 border-[#74bf28] translate-x-1'
+              activePillar === 2
+                ? 'bg-slate-50 shadow-md border-l-4 border-[#15803d] translate-x-1'
                 : 'hover:bg-slate-50/70'
             }`}
           >
-            <div className="text-5xl sm:text-6xl font-black tracking-tight text-[#74bf28] font-serif mb-2">
-              {pillars[1].num}
+            <div className="text-5xl sm:text-6xl font-black tracking-tight text-[#15803d] font-serif mb-2">
+              {pillars[2].num}
             </div>
             <h3 className="text-lg font-extrabold text-slate-900 leading-snug mb-2">
-              {pillars[1].title}
+              {pillars[2].title}
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              {pillars[1].description}
+              {pillars[2].description}
             </p>
-            {activePillar === 1 && (
-              <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#5fa01f] bg-emerald-50 px-2.5 py-1 rounded-md">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#74bf28]" />
-                <span>{pillars[1].highlight}</span>
+            {activePillar === 2 && (
+              <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#15803d] bg-emerald-50 px-2.5 py-1 rounded-md">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#15803d]" />
+                <span>{pillars[2].highlight}</span>
               </div>
             )}
           </div>
@@ -246,7 +246,7 @@ export const MentalidadPillarsInfographic: React.FC = () => {
 
               {/* Curved Arrows (Cycle inside the mind) */}
               
-              {/* Arrow 1: Top-Left (Navy) */}
+              {/* Arrow 1: Top-Left (Navy) -> Corresponds to 01 */}
               <path
                 d={arrow1Path}
                 fill={activePillar === 0 ? '#1e3a8a' : '#0f223d'}
@@ -256,7 +256,7 @@ export const MentalidadPillarsInfographic: React.FC = () => {
                 onMouseLeave={() => setActivePillar(null)}
               />
 
-              {/* Arrow 2: Top-Right (Lime Green) */}
+              {/* Arrow 2: Top-Right (Lime Green) -> Corresponds to 02 */}
               <path
                 d={arrow2Path}
                 fill={activePillar === 1 ? '#8ce033' : '#74bf28'}
@@ -266,9 +266,19 @@ export const MentalidadPillarsInfographic: React.FC = () => {
                 onMouseLeave={() => setActivePillar(null)}
               />
 
-              {/* Arrow 3: Bottom-Right (Forest Green) */}
+              {/* Arrow 3: Bottom-Right (Dark Navy) -> Corresponds to 04 */}
               <path
                 d={arrow3Path}
+                fill={activePillar === 3 ? '#1e3a8a' : '#0f223d'}
+                filter="url(#arrow-glow)"
+                className="cursor-pointer transition-colors duration-200"
+                onMouseEnter={() => setActivePillar(3)}
+                onMouseLeave={() => setActivePillar(null)}
+              />
+
+              {/* Arrow 4: Bottom-Left (Forest Green) -> Corresponds to 03 */}
+              <path
+                d={arrow4Path}
                 fill={activePillar === 2 ? '#22c55e' : '#15803d'}
                 filter="url(#arrow-glow)"
                 className="cursor-pointer transition-colors duration-200"
@@ -276,19 +286,9 @@ export const MentalidadPillarsInfographic: React.FC = () => {
                 onMouseLeave={() => setActivePillar(null)}
               />
 
-              {/* Arrow 4: Bottom-Left (Navy / Tech Blue) */}
-              <path
-                d={arrow4Path}
-                fill={activePillar === 3 ? '#0369a1' : '#0a2540'}
-                filter="url(#arrow-glow)"
-                className="cursor-pointer transition-colors duration-200"
-                onMouseEnter={() => setActivePillar(3)}
-                onMouseLeave={() => setActivePillar(null)}
-              />
-
               {/* White Minimalist Line Icons inside the Curved Arrows */}
               
-              {/* Icon 1: Organization / Team Hierarchy (Top-Left Arrow) */}
+              {/* Icon 1: Organization / Team Hierarchy (Top-Left Arrow - 01) */}
               <g transform={`translate(${iconPos1.x - 14}, ${iconPos1.y - 14})`} stroke="#ffffff" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" className="pointer-events-none">
                 <circle cx="14" cy="5" r="3" />
                 <path d="M10 11h8" />
@@ -299,7 +299,7 @@ export const MentalidadPillarsInfographic: React.FC = () => {
                 <circle cx="22" cy="21" r="2.5" />
               </g>
 
-              {/* Icon 2: Binders / Data Architecture (Top-Right Arrow) */}
+              {/* Icon 2: Binders / Data Architecture (Top-Right Arrow - 02) */}
               <g transform={`translate(${iconPos2.x - 13}, ${iconPos2.y - 13})`} stroke="#ffffff" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" className="pointer-events-none">
                 <rect x="3" y="3" width="6" height="20" rx="1" />
                 <rect x="11" y="3" width="6" height="20" rx="1" />
@@ -309,17 +309,17 @@ export const MentalidadPillarsInfographic: React.FC = () => {
                 <circle cx="22" cy="18" r="1" fill="#ffffff" />
               </g>
 
-              {/* Icon 3: Speech Bubbles / Dialogue (Bottom-Right Arrow) */}
+              {/* Icon 3: Globe / Global Alliances (Bottom-Right Arrow - 04) */}
               <g transform={`translate(${iconPos3.x - 14}, ${iconPos3.y - 14})`} stroke="#ffffff" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" className="pointer-events-none">
-                <path d="M6 18H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2" />
-                <path d="M10 11h10a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-3l-4 3v-3h-3a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2z" />
-              </g>
-
-              {/* Icon 4: Globe / Global Alliances (Bottom-Left Arrow) */}
-              <g transform={`translate(${iconPos4.x - 14}, ${iconPos4.y - 14})`} stroke="#ffffff" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" className="pointer-events-none">
                 <circle cx="14" cy="14" r="10" />
                 <path d="M4 14h20" />
                 <ellipse cx="14" cy="14" rx="5" ry="10" />
+              </g>
+
+              {/* Icon 4: Speech Bubbles / Dialogue (Bottom-Left Arrow - 03) */}
+              <g transform={`translate(${iconPos4.x - 14}, ${iconPos4.y - 14})`} stroke="#ffffff" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" className="pointer-events-none">
+                <path d="M6 18H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2" />
+                <path d="M10 11h10a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-3l-4 3v-3h-3a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2z" />
               </g>
 
               {/* Central White Badge with Drop Shadow ("Mentalidad / ADN") */}
@@ -368,31 +368,31 @@ export const MentalidadPillarsInfographic: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Column: Pillars 03 and 04 */}
+        {/* Right Column: Pillars 02 (top) and 04 (bottom) */}
         <div className="col-span-4 space-y-16">
-          {/* Pillar 03 */}
+          {/* Pillar 02 */}
           <div
-            onMouseEnter={() => setActivePillar(2)}
+            onMouseEnter={() => setActivePillar(1)}
             onMouseLeave={() => setActivePillar(null)}
             className={`p-5 rounded-2xl transition-all duration-300 cursor-pointer ${
-              activePillar === 2
-                ? 'bg-slate-50 shadow-md border-r-4 border-[#15803d] -translate-x-1'
+              activePillar === 1
+                ? 'bg-slate-50 shadow-md border-r-4 border-[#74bf28] -translate-x-1'
                 : 'hover:bg-slate-50/70'
             }`}
           >
-            <div className="text-5xl sm:text-6xl font-black tracking-tight text-[#15803d] font-serif mb-2">
-              {pillars[2].num}
+            <div className="text-5xl sm:text-6xl font-black tracking-tight text-[#74bf28] font-serif mb-2">
+              {pillars[1].num}
             </div>
             <h3 className="text-lg font-extrabold text-slate-900 leading-snug mb-2">
-              {pillars[2].title}
+              {pillars[1].title}
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              {pillars[2].description}
+              {pillars[1].description}
             </p>
-            {activePillar === 2 && (
-              <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#15803d] bg-emerald-50 px-2.5 py-1 rounded-md">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#15803d]" />
-                <span>{pillars[2].highlight}</span>
+            {activePillar === 1 && (
+              <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#5fa01f] bg-emerald-50 px-2.5 py-1 rounded-md">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#74bf28]" />
+                <span>{pillars[1].highlight}</span>
               </div>
             )}
           </div>
@@ -487,8 +487,8 @@ export const MentalidadPillarsInfographic: React.FC = () => {
             {/* Arrows */}
             <path d={arrow1Path} fill="#0f223d" />
             <path d={arrow2Path} fill="#74bf28" />
-            <path d={arrow3Path} fill="#15803d" />
-            <path d={arrow4Path} fill="#0a2540" />
+            <path d={arrow3Path} fill="#0f223d" />
+            <path d={arrow4Path} fill="#15803d" />
 
             {/* Central White Badge */}
             <circle cx={cx} cy={cy} r={80} fill="#ffffff" filter="url(#mind-center-shadow-m)" />

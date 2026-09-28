@@ -9,7 +9,6 @@ import {
   ShieldCheck,
   Award,
   CheckCircle2,
-  Users,
   Building2,
   MapPin,
   Calendar,
@@ -59,13 +58,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#74bf28]/15 border border-[#74bf28]/30 text-[#8ce033] text-xs font-bold uppercase tracking-wider">
-                <Users className="w-3.5 h-3.5" />
-                <span>QUIÉNES SOMOS • 17+ AÑOS DE TRAYECTORIA</span>
-              </div>
-
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                Ingeniería de datos, cultura analítica y <span className="text-[#74bf28]">visión de negocio</span>
+                Nosotros
               </h1>
 
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
@@ -85,7 +79,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
             {/* Right Card: Quick Institutional Metrics */}
             <div className="lg:col-span-5">
-              <div className="bg-[#111c35]/80 backdrop-blur-md border border-slate-700/80 rounded-2xl p-6 shadow-2xl space-y-4">
+              <div className="bg-[#111c35]/80 backdrop-blur-md border border-slate-700/80 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-3.5">
                 <div className="flex items-center justify-between border-b border-slate-700/60 pb-3">
                   <div className="flex items-center gap-2">
                     <Building2 className="w-4 h-4 text-[#74bf28]" />
@@ -93,36 +87,51 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                       Trayectoria Institucional
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#74bf28] bg-[#74bf28]/15 px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-mono text-[#74bf28] bg-[#74bf28]/15 px-2 py-0.5 rounded font-bold">
                     DESDE 2007
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div className="p-3 bg-[#0a0f1d] rounded-xl border border-slate-800">
-                    <div className="text-2xl font-extrabold text-[#74bf28]">17+</div>
-                    <div className="text-[11px] text-slate-300 mt-0.5">Años de experiencia continua</div>
+                <div className="grid grid-cols-2 gap-2.5 text-xs">
+                  <div className="p-2.5 sm:p-3 bg-[#0a0f1d] rounded-xl border border-slate-800 flex flex-col justify-center">
+                    <div className="text-xl sm:text-2xl font-extrabold text-[#74bf28]">17+</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-300 mt-0.5 leading-snug">Años de experiencia continua</div>
                   </div>
-                  <div className="p-3 bg-[#0a0f1d] rounded-xl border border-slate-800">
-                    <div className="text-2xl font-extrabold text-white">Top 3%</div>
-                    <div className="text-[11px] text-slate-300 mt-0.5">Google Premier Partner LATAM</div>
+                  <div className="p-2.5 sm:p-3 bg-[#0a0f1d] rounded-xl border border-slate-800 flex flex-col justify-center">
+                    <div className="text-xl sm:text-2xl font-extrabold text-white">Top 3%</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-300 mt-0.5 leading-snug">Google Premier Partner LATAM</div>
                   </div>
-                  <div className="p-3 bg-[#0a0f1d] rounded-xl border border-slate-800">
-                    <div className="text-2xl font-extrabold text-cyan-400">+150</div>
-                    <div className="text-[11px] text-slate-300 mt-0.5">Grandes empresas transformadas</div>
+                  <div className="p-2.5 sm:p-3 bg-[#0a0f1d] rounded-xl border border-slate-800 flex flex-col justify-center">
+                    <div className="text-xl sm:text-2xl font-extrabold text-cyan-400">+150</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-300 mt-0.5 leading-snug">Grandes empresas transformadas</div>
                   </div>
-                  <div className="p-3 bg-[#0a0f1d] rounded-xl border border-slate-800">
-                    <div className="text-2xl font-extrabold text-emerald-400">100%</div>
-                    <div className="text-[11px] text-slate-300 mt-0.5">Especialistas certificados</div>
+                  <div className="p-2.5 sm:p-3 bg-[#0a0f1d] rounded-xl border border-slate-800 flex flex-col justify-center">
+                    <div className="text-xl sm:text-2xl font-extrabold text-emerald-400">100%</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-300 mt-0.5 leading-snug">Especialistas certificados</div>
+                  </div>
+                  <div className="p-2.5 sm:p-3 bg-[#0a0f1d] rounded-xl border border-slate-800 flex flex-col justify-center">
+                    <div className="text-xl sm:text-2xl font-extrabold text-[#8ce033]">95%+</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-300 mt-0.5 leading-snug">Tasa de retención de clientes a largo plazo</div>
+                  </div>
+                  <div className="p-2.5 sm:p-3 bg-[#0a0f1d] rounded-xl border border-slate-800 flex flex-col justify-center">
+                    <div className="text-xl sm:text-2xl font-extrabold text-amber-400">+10</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-300 mt-0.5 leading-snug">Países con proyectos implementados en la región</div>
+                  </div>
+                  <div className="p-2.5 sm:p-3 bg-[#0a0f1d] rounded-xl border border-slate-800 flex flex-col justify-center">
+                    <div className="text-xl sm:text-2xl font-extrabold text-indigo-400">1°</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-300 mt-0.5 leading-snug">Primera agencia chilena certificada en Google Tag Manager</div>
+                  </div>
+                  <div className="p-2.5 sm:p-3 bg-[#0a0f1d] rounded-xl border border-slate-800 flex flex-col justify-center">
+                    <div className="text-xl sm:text-2xl font-extrabold text-emerald-300">+40%</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-300 mt-0.5 leading-snug">Incremento promedio en el ROI / ROAS de nuestros clientes</div>
                   </div>
                 </div>
 
-                <div className="pt-2 text-[11px] text-slate-400 flex items-center justify-between border-t border-slate-700/60">
-                  <span className="flex items-center gap-1">
+                <div className="pt-2 text-[11px] text-slate-400 flex items-center justify-start border-t border-slate-700/60">
+                  <span className="flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-[#74bf28]" />
                     Santiago de Chile • Lastarria
                   </span>
-                  <span className="text-slate-300 font-medium">Cobertura Regional</span>
                 </div>
               </div>
             </div>
@@ -632,26 +641,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           </div>
         </div>
       </section>
-
-      {/* CTA Bottom Banner Matching Wireframe */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-        <div className="bg-[#74bf28] rounded-2xl p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="text-left">
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[#060a12] leading-snug">
-              ¿Hablamos 30 minutos de tu proyecto?
-            </h3>
-            <p className="text-xs sm:text-sm text-[#060a12]/80 mt-1 font-medium">
-              Sin compromiso, definamos la ruta más adecuada para acelerar tus resultados.
-            </p>
-          </div>
-          <button
-            onClick={() => onOpenConsultation('Nosotros / Quiénes Somos')}
-            className="shrink-0 px-7 py-3.5 rounded-xl bg-[#060a12] text-white hover:bg-slate-900 text-xs uppercase tracking-wider font-bold transition-all shadow-lg cursor-pointer transform hover:-translate-y-0.5"
-          >
-            Agendar llamada
-          </button>
-        </div>
-      </div>
     </div>
   );
 };

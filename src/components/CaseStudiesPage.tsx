@@ -30,6 +30,23 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [activeModalCase, setActiveModalCase] = useState<CaseStudy | null>(null);
 
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    service: 'ga4',
+    message: '',
+    consent: true
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
   const categories = [
     { id: 'todos', label: 'Todos los casos' },
     { id: 'educacion', label: 'Educación Superior' },
@@ -76,11 +93,6 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Hero Left Content */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#74bf28]/15 border border-[#74bf28]/30 text-[#8ce033] text-xs font-bold uppercase tracking-wider">
-                <TrendingUp className="w-3.5 h-3.5" />
-                <span>CASOS DE ÉXITO EMPRESARIALES</span>
-              </div>
-
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Resultados reales respaldados por <span className="text-[#74bf28]">datos y tecnología</span>
               </h1>
@@ -98,54 +110,171 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
+
+              <div className="pt-4 flex items-center gap-2 text-xs text-slate-400">
+                <div className="w-4 h-4 rounded-full bg-[#74bf28]/20 flex items-center justify-center">
+                  <span className="w-2 h-2 rounded-full bg-[#74bf28]"></span>
+                </div>
+                <span>Google Premier Partner • Meta Business Partner • HubSpot Solutions</span>
+              </div>
             </div>
 
-            {/* Hero Right: High-Tech Telemetry Stats Card */}
-            <div className="lg:col-span-5">
-              <div className="bg-[#111c35]/80 backdrop-blur-md border border-slate-700/80 rounded-2xl p-6 shadow-2xl relative">
-                <div className="flex items-center justify-between border-b border-slate-700/60 pb-3 mb-5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#74bf28] animate-pulse" />
-                    <span className="text-xs font-mono text-slate-300 uppercase tracking-wider font-semibold">
-                      Métricas Consolidadas
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-mono text-[#74bf28] bg-[#74bf28]/15 px-2 py-0.5 rounded border border-[#74bf28]/30">
-                    LATAM ENTERPRISE
-                  </span>
+            {/* Right Contact Form Card */}
+            <div className="lg:col-span-5" id="contacto-casos">
+              <div className="bg-[#111c35]/95 border border-slate-700/80 rounded-2xl p-6 sm:p-7 shadow-2xl backdrop-blur-sm">
+                <div className="mb-4">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-white">
+                    Cuéntanos tu Desafío
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Te ayudamos a encontrar la mejor solución técnica y estratégica.
+                  </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-3.5 bg-[#0a0f1d] rounded-xl border border-slate-800">
-                    <div className="text-2xl sm:text-3xl font-extrabold text-[#74bf28]">+48%</div>
-                    <div className="text-[11px] text-slate-300 mt-0.5 font-medium leading-tight">
-                      Incremento medio en ROAS publicitario
+                {submitted ? (
+                  <div className="p-6 bg-[#0a0f1d] rounded-xl border border-slate-700 text-center space-y-3">
+                    <div className="w-12 h-12 rounded-full bg-[#74bf28]/20 text-[#74bf28] flex items-center justify-center mx-auto">
+                      <CheckCircle2 className="w-7 h-7" />
                     </div>
+                    <h4 className="text-base font-bold text-white">¡Requerimiento Recibido con Éxito!</h4>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      Hemos asignado tu caso a un <strong>Lead Solution Consultant</strong> de Mentalidad Web. Te contactaremos en menos de 24 horas hábiles a <span className="text-[#8ce033] font-semibold">{formData.email}</span>.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setSubmitted(false)}
+                      className="mt-2 text-xs text-slate-400 hover:text-white underline cursor-pointer"
+                    >
+                      Enviar otra consulta
+                    </button>
                   </div>
-                  <div className="p-3.5 bg-[#0a0f1d] rounded-xl border border-slate-800">
-                    <div className="text-2xl sm:text-3xl font-extrabold text-white">-27%</div>
-                    <div className="text-[11px] text-slate-300 mt-0.5 font-medium leading-tight">
-                      Reducción en Costo por Adquisición (CPA)
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="cases-name">
+                        Nombre y Apellido *
+                      </label>
+                      <input
+                        id="cases-name"
+                        required
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="Ej. Andrea Morales"
+                        className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                      />
                     </div>
-                  </div>
-                  <div className="p-3.5 bg-[#0a0f1d] rounded-xl border border-slate-800">
-                    <div className="text-2xl sm:text-3xl font-extrabold text-cyan-400">+$150M</div>
-                    <div className="text-[11px] text-slate-300 mt-0.5 font-medium leading-tight">
-                      USD anuales en medios gestionados
-                    </div>
-                  </div>
-                  <div className="p-3.5 bg-[#0a0f1d] rounded-xl border border-slate-800">
-                    <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400">100%</div>
-                    <div className="text-[11px] text-slate-300 mt-0.5 font-medium leading-tight">
-                      Conformidad con Ley 21.719 y Consent Mode
-                    </div>
-                  </div>
-                </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-between text-[11px] text-slate-400">
-                  <span>Auditorías con Google Cloud y GMP</span>
-                  <span className="text-[#8ce033] font-semibold">Casos Verificados</span>
-                </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="cases-email">
+                        Email Corporativo *
+                      </label>
+                      <input
+                        id="cases-email"
+                        required
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="amorales@empresa.cl"
+                        className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="cases-company">
+                          Empresa / Organización *
+                        </label>
+                        <input
+                          id="cases-company"
+                          required
+                          type="text"
+                          value={formData.company}
+                          onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                          placeholder="Ej. Retail Group S.A."
+                          className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="cases-phone">
+                          Teléfono / WhatsApp *
+                        </label>
+                        <input
+                          id="cases-phone"
+                          required
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder="+56 9 1234 5678"
+                          className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="cases-service">
+                        Área de Interés Principal
+                      </label>
+                      <select
+                        id="cases-service"
+                        value={formData.service}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white focus:border-[#74bf28] px-3 py-2 shadow-xs"
+                      >
+                        <option value="ga4">Google Analytics 4 & GA360 / GTM Server-Side</option>
+                        <option value="ley-datos">Cumplimiento Ley 21.719 & Consent Mode v2</option>
+                        <option value="bigquery">BigQuery, Data Engineering & Dashboards</option>
+                        <option value="sem-dv360">Marketing Digital & Programmatic DV360</option>
+                        <option value="ia-predictive">Modelos Predictivos & IA Aplicada</option>
+                        <option value="hubspot">HubSpot, Inbound & Lead Scoring</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-300 mb-1" htmlFor="cases-message">
+                        Breve descripción de tu objetivo
+                      </label>
+                      <textarea
+                        id="cases-message"
+                        rows={2}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        placeholder="Cuéntanos sobre tus herramientas actuales, tiempos o metas..."
+                        className="w-full text-xs rounded-lg bg-[#0a0f1d] border border-slate-700 text-white placeholder-slate-500 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
+                      ></textarea>
+                    </div>
+
+                    <div className="flex items-start gap-2 pt-0.5">
+                      <input
+                        id="cases-consent"
+                        required
+                        type="checkbox"
+                        checked={formData.consent}
+                        onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                        className="mt-0.5 rounded border-slate-700 bg-[#0a0f1d] text-[#74bf28] focus:ring-[#74bf28]"
+                      />
+                      <label className="text-[10px] text-slate-400 leading-tight cursor-pointer" htmlFor="cases-consent">
+                        Autorizo el tratamiento de mis datos de contacto para esta consultoría según la{' '}
+                        <span className="underline text-[#74bf28]">Ley de Datos 21.719</span>.
+                      </label>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full py-3 px-4 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-500 text-white font-extrabold uppercase tracking-wider text-xs rounded-lg shadow-lg hover:shadow-xl transition duration-200 flex items-center justify-center gap-2 cursor-pointer mt-2"
+                    >
+                      <span>Solicitar Diagnóstico</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+
+                    <div className="text-center pt-0.5">
+                      <span className="text-[10px] text-slate-400 flex items-center justify-center gap-1.5">
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#74bf28]" />
+                        Respuesta garantizada en menos de 24 horas hábiles.
+                      </span>
+                    </div>
+                  </form>
+                )}
               </div>
             </div>
           </div>
@@ -223,18 +352,20 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({
                   </span>
                 </div>
 
-                {/* Client title */}
-                <h3 className="text-lg font-extrabold text-slate-900 group-hover:text-[#58991b] transition line-clamp-1 mb-2">
-                  {item.title}
-                </h3>
+                {/* Client title - Nombre completo visible sin truncar con altura equilibrada para no agrandar el marco */}
+                <div className="min-h-[3rem] flex items-center mb-2">
+                  <h3 className="text-base sm:text-[17px] font-extrabold text-slate-900 group-hover:text-[#58991b] transition leading-snug">
+                    {item.title}
+                  </h3>
+                </div>
 
                 {/* Summary */}
-                <p className="text-xs text-slate-600 leading-relaxed mb-5 line-clamp-3">
+                <p className="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-3">
                   {item.summary}
                 </p>
 
                 {/* Big Metric Highlight Container */}
-                <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 mb-5 group-hover:bg-[#74bf28]/5 transition">
+                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100 mb-4 group-hover:bg-[#74bf28]/5 transition">
                   <div className="text-3xl font-extrabold text-[#74bf28]">
                     {item.highlightMetric}
                   </div>
@@ -244,7 +375,7 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({
                 </div>
 
                 {/* Quick stats grid */}
-                <div className="grid grid-cols-2 gap-2 mb-5 text-[11px] font-mono">
+                <div className="grid grid-cols-2 gap-2 mb-4 text-[11px] font-mono">
                   <div className="p-2 bg-slate-100/70 rounded-lg text-slate-700">
                     <span className="text-slate-400 block text-[10px]">ROAS:</span>
                     <span className="font-bold text-emerald-600">{item.roasMetric}</span>
@@ -364,26 +495,6 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({
           </div>
         </div>
       )}
-
-      {/* CTA Bottom Banner Matching Wireframe */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        <div className="bg-[#74bf28] rounded-2xl p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="text-left">
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[#060a12] leading-snug">
-              ¿Hablamos 30 minutos de tu proyecto?
-            </h3>
-            <p className="text-xs sm:text-sm text-[#060a12]/80 mt-1 font-medium">
-              Sin compromiso, definamos la ruta más adecuada para acelerar tus resultados.
-            </p>
-          </div>
-          <button
-            onClick={() => onOpenConsultation('Casos de Éxito')}
-            className="shrink-0 px-7 py-3.5 rounded-xl bg-[#060a12] text-white hover:bg-slate-900 text-xs uppercase tracking-wider font-bold transition-all shadow-lg cursor-pointer transform hover:-translate-y-0.5"
-          >
-            Agendar llamada
-          </button>
-        </div>
-      </div>
     </div>
   );
 };

@@ -86,7 +86,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   <span className="text-slate-500">Especialista asignado:</span>
                   <span className="font-bold text-slate-900 flex items-center gap-1">
                     <UserCheck className="w-3.5 h-3.5 text-[#74bf28]" />
-                    Jose Valenzuela (Lead Partner)
+                    Pablo González (Lead Partner)
                   </span>
                 </div>
                 <div className="flex items-center justify-between border-b border-slate-200 pb-2">
