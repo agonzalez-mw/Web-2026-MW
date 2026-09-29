@@ -270,20 +270,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     </select>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1" htmlFor="lead-message">
-                      Breve descripción de tu objetivo
-                    </label>
-                    <textarea
-                      id="lead-message"
-                      rows={2}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Cuéntanos sobre tus herramientas actuales, tiempos esperados o volumen de tráfico..."
-                      className="w-full text-xs rounded-lg bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus:border-[#74bf28] focus:ring-1 focus:ring-[#74bf28] px-3 py-2 shadow-xs"
-                    ></textarea>
-                  </div>
-
                   <div className="flex items-start gap-2 pt-1">
                     <input
                       id="lead-consent"
