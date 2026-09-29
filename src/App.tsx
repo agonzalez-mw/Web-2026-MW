@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ClientTrustBar } from './components/ClientTrustBar';
@@ -14,7 +14,7 @@ import { FeaturedCaseSection } from './components/FeaturedCaseSection';
 import { BlogSection } from './components/BlogSection';
 import { Footer } from './components/Footer';
 import { ServiceDetailPage } from './components/ServiceDetailPage';
-import { ArticleModal } from './components/ArticleModal';
+import { ArticleDetailPage } from './components/ArticleDetailPage';
 import { ConsultationModal } from './components/ConsultationModal';
 import { DiagnosticToolModal } from './components/DiagnosticToolModal';
 import { ServicesPage } from './components/ServicesPage';
@@ -23,7 +23,7 @@ import { ClientsPage } from './components/ClientsPage';
 import { BlogPage } from './components/BlogPage';
 import { AboutPage } from './components/AboutPage';
 import { ServiceItem, BlogPost } from './types';
-import { SERVICES_LIST, SERVICES_CATEGORIES } from './data/martechData';
+import { SERVICES_LIST, SERVICES_CATEGORIES, EXTENDED_BLOG_POSTS } from './data/martechData';
 import { CheckCircle, X } from 'lucide-react';
 
 type AppPage = 'home' | 'servicios' | 'casos' | 'clientes' | 'blog' | 'nosotros';
@@ -72,7 +72,17 @@ export default function App() {
     return null;
   });
 
-  const [selectedArticle, setSelectedArticle] = useState<BlogPost | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<BlogPost | null>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.replace('#', '');
+      if (hash.startsWith('articulo-')) {
+        const aId = hash.replace('articulo-', '');
+        const found = EXTENDED_BLOG_POSTS.find(p => p.id === aId);
+        if (found) return found;
+      }
+    }
+    return null;
+  });
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [isDiagnosticOpen, setIsDiagnosticOpen] = useState(false);
   const [consultationServiceTopic, setConsultationServiceTopic] = useState<string | undefined>(undefined);
@@ -80,15 +90,52 @@ export default function App() {
   // Toast notification for lead capture
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // 0.3s Page Transition Loading State
+  const [isPageLoading, setIsPageLoading] = useState(false);
+  const transitionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const triggerPageTransition = () => {
+    setIsPageLoading(true);
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current);
+    }
+    transitionTimeoutRef.current = setTimeout(() => {
+      setIsPageLoading(false);
+    }, 300); // exactly 0.3 seconds
+  };
+
+  useEffect(() => {
+    return () => {
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, []);
+
   // Sync with browser hash changes (back/forward navigation)
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
       
+      if (hash.startsWith('articulo-')) {
+        const aId = hash.replace('articulo-', '');
+        const found = EXTENDED_BLOG_POSTS.find(p => p.id === aId);
+        if (found) {
+          triggerPageTransition();
+          setSelectedArticle(found);
+          setSelectedService(null);
+          setActiveSection('blog');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+      }
+
       if (hash.startsWith('servicio-')) {
         const sId = hash.replace('servicio-', '');
         const found = allServices.find(s => s.id === sId);
         if (found) {
+          triggerPageTransition();
+          setSelectedArticle(null);
           setSelectedService(found);
           window.scrollTo({ top: 0, behavior: 'smooth' });
           return;
@@ -105,6 +152,8 @@ export default function App() {
       };
 
       if (validPages[hash]) {
+        triggerPageTransition();
+        setSelectedArticle(null);
         setSelectedService(null);
         setCurrentPage(validPages[hash]);
         setActiveSection(hash === 'inicio' ? 'inicio' : hash);
@@ -117,6 +166,7 @@ export default function App() {
 
   const handleNavigate = (sectionId: string) => {
     setSelectedService(null);
+    setSelectedArticle(null);
     const validPages: Record<string, AppPage> = {
       'servicios': 'servicios',
       'casos': 'casos',
@@ -127,6 +177,7 @@ export default function App() {
     };
 
     if (validPages[sectionId]) {
+      triggerPageTransition();
       const targetPage = validPages[sectionId];
       setCurrentPage(targetPage);
       setActiveSection(sectionId);
@@ -138,6 +189,7 @@ export default function App() {
     // Navigating to internal anchors (e.g. 'contacto')
     setActiveSection(sectionId);
     if (currentPage !== 'home') {
+      triggerPageTransition();
       setCurrentPage('home');
       window.location.hash = `#${sectionId}`;
       setTimeout(() => {
@@ -156,8 +208,19 @@ export default function App() {
   };
 
   const handleSelectService = (service: ServiceItem) => {
+    triggerPageTransition();
+    setSelectedArticle(null);
     setSelectedService(service);
     window.location.hash = `#servicio-${service.id}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectArticle = (post: BlogPost) => {
+    triggerPageTransition();
+    setSelectedService(null);
+    setSelectedArticle(post);
+    setActiveSection('blog');
+    window.location.hash = `#articulo-${post.id}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -202,10 +265,30 @@ export default function App() {
 
       {/* Main Page Flow Matching Wireframe & Screens */}
       <main className="flex-1">
-        {selectedService ? (
+        {selectedArticle ? (
+          <ArticleDetailPage
+            post={selectedArticle}
+            onBack={() => {
+              triggerPageTransition();
+              setSelectedArticle(null);
+              handleNavigate('blog');
+            }}
+            onSelectArticle={handleSelectArticle}
+            onOpenConsultation={(topic) => {
+              setConsultationServiceTopic(topic || `Artículo: ${selectedArticle.title}`);
+              setIsConsultationOpen(true);
+            }}
+            onNavigateHome={() => {
+              triggerPageTransition();
+              setSelectedArticle(null);
+              handleNavigate('inicio');
+            }}
+          />
+        ) : selectedService ? (
           <ServiceDetailPage
             service={selectedService}
             onBack={() => {
+              triggerPageTransition();
               setSelectedService(null);
               window.location.hash = '#servicios';
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -215,6 +298,7 @@ export default function App() {
               setIsConsultationOpen(true);
             }}
             onSelectCaseStudy={() => {
+              triggerPageTransition();
               setSelectedService(null);
               handleNavigate('casos');
             }}
@@ -255,7 +339,7 @@ export default function App() {
 
             {currentPage === 'blog' && (
               <BlogPage
-                onSelectArticle={(post) => setSelectedArticle(post)}
+                onSelectArticle={handleSelectArticle}
                 onOpenConsultation={(topic) => {
                   setConsultationServiceTopic(topic || 'Blog e Insights');
                   setIsConsultationOpen(true);
@@ -318,7 +402,7 @@ export default function App() {
 
                 {/* Screen 5: Mentalidad Insights Blog */}
                 <BlogSection
-                  onSelectArticle={(post) => setSelectedArticle(post)}
+                  onSelectArticle={handleSelectArticle}
                   onNavigateToAllArticles={() => handleNavigate('blog')}
                 />
               </>
@@ -339,17 +423,7 @@ export default function App() {
 
       {/* Interactive Modals & Multi-Screen Tools */}
       
-      {/* Modal 1: Blog Article Reader */}
-      <ArticleModal
-        post={selectedArticle}
-        onClose={() => setSelectedArticle(null)}
-        onOpenConsultation={() => {
-          setConsultationServiceTopic(selectedArticle?.title);
-          setIsConsultationOpen(true);
-        }}
-      />
-
-      {/* Modal 2: Consultation & Meeting Booking Calendar */}
+      {/* Modal 1: Consultation & Meeting Booking Calendar */}
       <ConsultationModal
         isOpen={isConsultationOpen}
         defaultService={consultationServiceTopic}
@@ -365,6 +439,28 @@ export default function App() {
           setIsConsultationOpen(true);
         }}
       />
+
+      {/* 0.3s Page Transition Loading Spinner (Rueda de Carga) */}
+      {isPageLoading && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-white/70 backdrop-blur-xs transition-opacity duration-150 animate-in fade-in"
+          role="status"
+          aria-live="polite"
+          aria-label="Cargando página"
+        >
+          <div className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-white/95 border border-slate-200/90 shadow-2xl backdrop-blur-md animate-in zoom-in-95 duration-100 select-none">
+            {/* Elegant rotating ring loader with brand green accent */}
+            <div className="relative w-12 h-12 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full border-[3px] border-slate-100" />
+              <div className="absolute inset-0 rounded-full border-[3px] border-[#74bf28] border-t-transparent animate-spin" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#74bf28]" />
+            </div>
+            <span className="text-[11px] font-bold text-slate-700 tracking-wider uppercase font-mono">
+              Cargando...
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
